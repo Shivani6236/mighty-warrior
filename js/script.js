@@ -1,5 +1,5 @@
-const publicKey = "5619c56848f0d9d0ca17fd56f354cb4d";
-const privateKey = "f46f7fb331fc8bfd6fc637da8d1cca7861ae8067";
+const publicKey = "973c0620c248a2a57aaf6b7d939100b3";
+const privateKey = "ea980a7ee20c84e506b468b33fb34eb08d61d679";
 
 let searchBar = document.getElementById("search-bar");
 let searchResults = document.getElementById("search-results");
