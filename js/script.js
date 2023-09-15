@@ -1,14 +1,8 @@
 // Public key
-// 9ab871748d83ae2eb5527ffd69e034de
+// 5619c56848f0d9d0ca17fd56f354cb4d
 
-// Private Key
-// ad79003cf7316d9bd72c6eda71d1c93d7e807e90
+// md5(hash) = 3a6fccba7568d9d0cfa22dfe2be60d8a
 
-// hash
-// 1ad79003cf7316d9bd72c6eda71d1c93d7e807e909ab871748d83ae2eb5527ffd69e034de
-// md5(hash) = d35377547e551cd64a60657d2517bb7f
-
-//*-------------------------------------- Selecting the element from DOM ----------------------------------------------------
 let searchBar = document.getElementById("search-bar");
 let searchResults = document.getElementById("search-results");
 
@@ -17,12 +11,6 @@ searchBar.addEventListener("input", () => searchHeros(searchBar.value));
 
 // function for API call
 async function searchHeros(textSearched) {
-
-     // let PUBLIC_KEY = "9ab871748d83ae2eb5527ffd69e034de";
-     // let PRIVATE_KEY = "ad79003cf7316d9bd72c6eda71d1c93d7e807e90";
-
-     // let ts = new Date().getTime();
-     // let hash = CryptoJS.MD5(ts + PRIVATE_KEY + PUBLIC_KEY).toString();
      
      // if there is no text written in the search bar then nothing is displayed 
      if (textSearched.length == 0) {
@@ -31,21 +19,12 @@ async function searchHeros(textSearched) {
      }
 
      // API call to get the data 
-     await fetch(`https://gateway.marvel.com/v1/public/characters?nameStartsWith=${textSearched}&apikey=9ab871748d83ae2eb5527ffd69e034de&hash=d35377547e551cd64a60657d2517bb7f?ts=1`)
+     await fetch(`https://gateway.marvel.com/v1/public/characters?nameStartsWith=${textSearched}&apikey=5619c56848f0d9d0ca17fd56f354cb4d&hash=3a6fccba7568d9d0cfa22dfe2be60d8a?ts=1`)
           .then(res => res.json()) //Converting the data into JSON format
           .then(data => showSearchedResults(data.data.results)) //sending the searched results characters to show in HTML
 }
 
-// Function for displaying the searched results in DOM
-// An array is accepted as argument 
-// SearchedHero is the array of objects which matches the string entered in the searched bar
 function showSearchedResults(searchedHero) {
-
-
-     // IDs of the character which are added in the favourites 
-     // Used for displaying the appropriate button in search results i.e
-     // if the id exist in this array then we display "Remove from favourites" button otherwise we display "Add to favourites button"
-     // favouritesCharacterIDs is a map which contains id of character as key and true as value 
      let favouritesCharacterIDs = localStorage.getItem("favouritesCharacterIDs");
      if(favouritesCharacterIDs == null){
           // If we did't got the favouritesCharacterIDs then we iniitalize it with empty map
@@ -145,7 +124,6 @@ function addToFavourites() {
           }
 
           // favouritesCharacterIDs is taken from localStorage for adding ID of the character which is added in favourites
-          // It is created because when we search for the characters which is already added in favourites we check that if the id of the character exist in this array then we display "Remove form favourites" insted of "Add to favourites"
           let favouritesCharacterIDs = localStorage.getItem("favouritesCharacterIDs");
 
           
@@ -232,7 +210,6 @@ function addToFavourites() {
 function addInfoInLocalStorage() {
 
      // This function basically stores the data of character in localStorage.
-     // When user clicks on the info button and when the info page is opened that page fetches the heroInfo and display the data  
      let heroInfo = {
           name: this.parentElement.parentElement.parentElement.children[2].children[0].innerHTML,
           description: this.parentElement.parentElement.parentElement.children[2].children[1].innerHTML,
