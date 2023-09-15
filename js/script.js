@@ -218,7 +218,7 @@ function addToFavourites() {
       localStorage.getItem("favouriteCharacters")
     );
 
-    // getting the favaourites character ids array for deleting the character id from favouritesCharacterIDs also
+    // getting the ndourites character ids array for deleting the character id from favouritesCharacterIDs also
     let favouritesCharacterIDs = new Map(
       JSON.parse(localStorage.getItem("favouritesCharacterIDs"))
     );
@@ -294,56 +294,4 @@ function addInfoInLocalStorage() {
   };
 
   localStorage.setItem("heroInfo", JSON.stringify(heroInfo));
-}
-
-/*-----------------------------------------------------  Theme Changing  -------------------------------------------------  */
-
-// Selection of theme button
-let themeButton = document.getElementById("theme-btn");
-
-themeButton.addEventListener("click", themeChanger);
-
-// IIFE fuction which checks the localStorage and applies the presviously set theme
-(function () {
-  let currentTheme = localStorage.getItem("theme");
-  if (currentTheme == null) {
-    root.setAttribute("color-scheme", "light");
-    themeButton.innerHTML = `<i class="fa-solid fa-moon"></i>`;
-    themeButton.style.backgroundColor = "#0D4C92";
-    localStorage.setItem("theme", "light");
-    return;
-  }
-
-  switch (currentTheme) {
-    case "light":
-      root.setAttribute("color-scheme", "light");
-      themeButton.innerHTML = `<i class="fa-solid fa-moon"></i>`;
-      themeButton.style.backgroundColor = "#0D4C92";
-      break;
-    case "dark":
-      root.setAttribute("color-scheme", "dark");
-      themeButton.innerHTML = `<i class="fa-solid fa-sun"></i>`;
-      themeButton.style.backgroundColor = "#FB2576";
-      themeButton.childNodes[0].style.color = "black";
-      break;
-  }
-})();
-
-// function for handeling theme button changes
-function themeChanger() {
-  let root = document.getElementById("root");
-  // let themeIcon = document.querySelector("#themeButton i");
-  if (root.getAttribute("color-scheme") == "light") {
-    root.setAttribute("color-scheme", "dark");
-    themeButton.innerHTML = `<i class="fa-solid fa-sun"></i>`;
-    themeButton.style.backgroundColor = "#FB2576";
-    themeButton.childNodes[0].style.color = "black";
-    localStorage.setItem("theme", "dark");
-  } else if (root.getAttribute("color-scheme") == "dark") {
-    root.setAttribute("color-scheme", "light");
-    themeButton.innerHTML = `<i class="fa-solid fa-moon"></i>`;
-    themeButton.style.backgroundColor = "#0D4C92";
-    themeButton.childNodes[0].style.color = "white";
-    localStorage.setItem("theme", "light");
-  }
 }
