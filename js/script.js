@@ -1,13 +1,16 @@
-// Public key
-// 5619c56848f0d9d0ca17fd56f354cb4d
-
-// md5(hash) = 3a6fccba7568d9d0cfa22dfe2be60d8a
+const publicKey = "5619c56848f0d9d0ca17fd56f354cb4d";
+const privateKey = "f46f7fb331fc8bfd6fc637da8d1cca7861ae8067";
 
 let searchBar = document.getElementById("search-bar");
 let searchResults = document.getElementById("search-results");
 
 // Adding eventListener to search bar
 searchBar.addEventListener("input", () => searchHeros(searchBar.value));
+
+function generateHash(ts) {
+  const hash = CryptoJS.MD5(ts + privateKey + publicKey);
+  return hash;
+}
 
 // function for API call
 async function searchHeros(textSearched) {
@@ -18,8 +21,11 @@ async function searchHeros(textSearched) {
           return;
      }
 
+     const ts = new Date().getTime();
+     const hash = generateHash(ts);
+
      // API call to get the data 
-     await fetch(`https://gateway.marvel.com/v1/public/characters?nameStartsWith=${textSearched}&apikey=5619c56848f0d9d0ca17fd56f354cb4d&hash=3a6fccba7568d9d0cfa22dfe2be60d8a?ts=1`)
+     await fetch(`https://gateway.marvel.com/v1/public/characters?nameStartsWith=${textSearched}&apikey=${publicKey}&hash=${hash}?ts=${ts}`)
           .then(res => res.json()) //Converting the data into JSON format
           .then(data => showSearchedResults(data.data.results)) //sending the searched results characters to show in HTML
 }
